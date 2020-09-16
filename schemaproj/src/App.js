@@ -20,31 +20,30 @@ const initialFormErrors = {
   terms: false,
 }
 
-const initialOnboard = []
 const initialDisabled = true
 
 function App() {
 
-  const [onboard, setOnboard] = useState(initialOnboard)
+  const [onboard, setOnboard] = useState([])
   const [formValues, setformValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
 
-  const getOnboard = () =>{
-    axios.get('https://reqres.in/api/users')
-      .then(res =>{
-        setOnboard(res.data.data)
-      })
-      .catch(err => {
-        debugger
-        console.log(err)
-      })
-  }
+  // const getOnboard = () =>{
+  //   axios.get('https://reqres.in/api/users')
+  //     .then(res =>{
+  //       setOnboard(res.data.data)
+  //     })
+  //     .catch(err => {
+  //       debugger
+  //       console.log(err)
+  //     })
+  // }
 
   const postNewOnboard = newOnboard => {
     axios.post('https://reqres.in/api/users', newOnboard)
     .then(res =>{
-      setOnboard([...onboard, res.data.data])
+      setOnboard([...onboard, newOnboard])
       setformValues(initialFormValues)
     })
     .catch(err =>{
@@ -90,9 +89,9 @@ function App() {
     postNewOnboard(newOnboard)
   }
 
-  useEffect(() => {
-    getOnboard()
-  }, [])
+  // useEffect(() => {
+  //   getOnboard()
+  // }, [])
 
   useEffect(() => {
     schema.isValid(formValues)
@@ -115,7 +114,7 @@ function App() {
       {
         onboard.map(index => {
           return(
-            <OnboardCard key={index.name} details={onboard} />
+            <OnboardCard key={index.name} details={index} />
           )
         })
       }
