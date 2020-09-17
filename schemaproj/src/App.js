@@ -5,7 +5,6 @@ import OnboardCard from './OnboardCard'
 import schema from './validation/schema'
 import axios from 'axios'
 import * as yup from 'yup'
-
 const initialFormValues = {
   name: '',
   email: '',
@@ -28,17 +27,6 @@ function App() {
   const [formValues, setformValues] = useState(initialFormValues)
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
-
-  // const getOnboard = () =>{
-  //   axios.get('https://reqres.in/api/users')
-  //     .then(res =>{
-  //       setOnboard(res.data.data)
-  //     })
-  //     .catch(err => {
-  //       debugger
-  //       console.log(err)
-  //     })
-  // }
 
   const postNewOnboard = newOnboard => {
     axios.post('https://reqres.in/api/users', newOnboard)
@@ -88,10 +76,6 @@ function App() {
     }
     postNewOnboard(newOnboard)
   }
-
-  // useEffect(() => {
-  //   getOnboard()
-  // }, [])
 
   useEffect(() => {
     schema.isValid(formValues)
